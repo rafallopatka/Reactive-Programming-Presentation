@@ -1,0 +1,286 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Reactive Extensions</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/white.css">
+		<link rel="stylesheet" href="css/custom.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		 <link rel="stylesheet" href="lib/css/docco.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal bg">
+			<div class="slides">
+				<section>
+					<h2>Reactive programming with</h2> 
+					<h1> ReactiveX</h1> 
+				</section>
+				<section>
+					<h2>Agenda</h2>
+					<ul>
+						<li>Basics</li>
+						<li>Event handling</li>
+						<li>Multithreading</li>
+						<li>Combining observables</li>
+						<li>Summary</li>
+						<li>Questions</li>
+					</ul>
+				</section>
+				<section>
+					<section>
+						<h2>Basics</h2>
+					</section>
+					<section>
+						<h3>Imperative programming</h3>
+						<blockquote>
+							forces programmers to write “how” a program will solve a certain task
+						</blockquote>
+						<pre><code class="hljs" data-trim data-noescape data-include="/examples/basics-imperative.kt"></code></pre>
+					</section>
+					<section>
+						<h3>Functional programming</h3>
+						<blockquote>
+							is a programming paradigm where you model everything as a result of a function that avoids changing state and mutating data
+						</blockquote>
+						<pre><code class="hljs" data-trim data-noescape data-include="/examples/basics-functional.kt"></code></pre>
+					</section>
+					<section>
+							<h3>Reactive programming</h3>
+							<blockquote>
+									is an asynchronous programming paradigm concerned with data streams, where everything can be a stream of data
+							</blockquote>
+							<img src="assets/stream-chess.gif" />
+					</section>
+					<section>
+							<h3>Reactive vs Imperative</h3>
+							<blockquote>
+								In reactive programming observables/streams emit data, and PUSH (send) it to the subscribers
+								In imperative programming you explicitly PULL (request) data
+							</blockquote>
+					</section>
+					<section>
+						<h3>But why?</h3>
+				</section>
+					<section>
+						<h3>Reactive Extensions</h3>
+						<blockquote>
+							ReactiveX is a library for composing asynchronous and event-based programs by using observable sequences
+						</blockquote>
+					</section>
+					<!-- <section>
+						<h3>Observables</h3>
+						<img src="assets/marble-example.png" />
+					</section> -->
+					<section>
+							<h3>Observable & Observer</h3>
+							<blockquote >
+								In ReactiveX an observer subscribes to an Observable. Then that observer reacts to whatever item or sequence of items the Observable emits
+							</blockquote>
+							<pre ><code class="hljs" style="height: 200px" data-trim data-noescape data-include="/examples/basics-observable-operators.kt"></code></pre>
+							<a href="http://reactivex.io/documentation/operators.html" target="blank">More</a>
+						</section>
+
+					<section>
+						<h3>Cold observable</h3>
+						<blockquote>
+							waits until an observer subscribes to it before it begins to emit items, and so such an observer is guaranteed to see the whole sequence from the beginning
+						</blockquote>
+						<img src="assets/cold-observable.png"/>
+					</section>
+					
+					<section>
+						<h3>Hot observable</h3>
+						<blockquote>
+							may begin emitting items as soon as it is created, and so any observer who later subscribes to that Observable may start observing the sequence somewhere in the middle					
+						</blockquote>
+						<img src="assets/hot-observable.png"/>
+					</section>
+					<section>
+						<h3>Creating observables</h3>
+						<ul>
+							<li>Create - custom observable</li>
+							<li>From - arrays, events, callbacks</li>
+							<li>Just  - single item observable</li>
+							<li>Empty - zero elements observable</li>
+							<li>Interval - time based observable</li>
+						</ul>
+						<pre><code class="hljs kotlin" data-trim data-noescape data-include="/examples/basics-observable-create-operators.kt"></code></pre>
+					</section>
+					<section>
+						<h3>Observable.Create</h3>
+						<pre><code class="hljs kotlin" data-trim data-noescape data-include="/examples/basics-observable-create.kt"></code></pre>
+					</section> 
+					<!-- <section> 
+							<h3>Subject</h3>
+							<blockquote>
+								is both an observer and an observable
+							</blockquote>
+							<p>
+								<span>Async</span>/
+								<span>Behavior</span>/
+								<span>Publish</span>/
+								<span>Replay</span>
+							</p>
+							<pre><code class="hljs kotlin" data-trim data-noescape data-include="/examples/basics-observable-subject.kt"></code></pre>
+					</section> -->
+				</section>
+				<section>
+					<section>
+						<h2>Event handling </h2>
+					</section>
+					<section>
+						<h3>Example system</h3>
+						<img src="assets/system.png" />
+					</section>
+					<section>
+						<h3>Hot data source</h3>
+						<img src="assets/datasource.png" style="height:100px;" />
+						<pre><code class="hljs" data-trim data-noescape data-include="/examples/events-probes.1.kt"></code></pre>
+					</section>
+					<section>
+						<h3>Transformations</h3>
+						<img src="assets/deviations.png" style="height: 100px;" />
+						<pre><code class="hljs" data-trim data-noescape data-include="/examples/events-probes.2.kt"></code></pre>
+					</section>
+					<section>
+						<h3>Sampling</h3>
+						<img src="assets/sampling.png" style="height: 100px;" />
+						<pre><code class="hljs" data-trim data-noescape data-include="/examples/events-probes.3.kt"></code></pre>
+					</section>
+					<section>
+						<h3>Overlapping buffers</h3>
+						<img src="assets/overlappingbuffers.png" style="height: 100px;" />
+						<pre><code class="hljs" data-trim data-noescape data-include="/examples/events-probes.4.kt"></code></pre>
+					</section>
+					<section>
+						<h3>Aggregation</h3>
+						<img src="assets/aggregation.png" style="height: 100px;"/>
+						<pre><code class="hljs" data-trim data-noescape data-include="/examples/events-probes.5.kt"></code></pre>
+					</section>
+				</section>
+				<section>
+						<section><h2>Multithreading</h2></section>
+						<section>
+								<h3>Rx is single-threaded by default</h3>
+								<pre><code class="hljs" data-trim data-noescape data-include="/examples/threading-single.kt"></code></pre>
+						</section>
+						<section>
+								<h3>SubscribeOn</h3>
+								<pre><code class="hljs" data-trim data-noescape data-include="/examples/threading-subscribe.kt"></code></pre>
+						</section>
+						<section>
+								<h3>ObserveOn</h3>
+								<pre><code class="hljs" data-trim data-noescape data-include="/examples/threading-observe.kt"></code></pre>
+						</section>
+						<section>
+								<h3>Blocking</h3>
+								<pre><code class="hljs" data-trim data-noescape data-include="/examples/threading-blocking.kt"></code></pre>
+						</section>
+						<section>
+								<h3>Parallel</h3>
+								<pre><code class="hljs" data-trim data-noescape data-include="/examples/threading-parallel.kt"></code></pre>
+						</section>
+				</section>
+				<section>
+						<section><h2>Combining observables</h2></section>
+						<section>
+								<h3>Zip</h3>
+								<pre><code class="hljs" data-trim data-noescape data-include="examples/combining-zip.kt"></code></pre>
+								<a target="blank" href="http://rxmarbles.com/#zip">Diagram</a>
+						</section>
+						<section>
+								<h3>Merge</h3>
+								<pre><code class="hljs" data-trim data-noescape data-include="examples/combining-merge.kt"></code></pre>
+								<a target="blank" href="http://rxmarbles.com/#merge">Diagram</a>
+						</section>
+						<section>
+								<h3>Concat</h3>
+								<pre><code class="hljs" data-trim data-noescape data-include="examples/combining-concat.kt"></code></pre>
+								<a target="blank" href="http://rxmarbles.com/#concat">Diagram</a>
+						</section>
+						<section>
+							<h3>Example streams</h3>
+							<pre><code class="hljs" data-trim data-noescape data-include="examples/combining-example-streams.kt"></code></pre>
+					</section>
+						<section>
+								<h3>FlatMap</h3>
+								<pre><code class="hljs" data-trim data-noescape data-include="examples/combining-flatmap.kt"></code></pre>
+								<a target="blank" href="http://rxmarbles.com/#mergeMap">Diagram</a>
+						</section>
+						<section>
+								<h3>ConcatMap</h3>
+								<pre><code class="hljs" data-trim data-noescape data-include="examples/combining-concatmap.kt"></code></pre>
+								<a target="blank" href="http://rxmarbles.com/#concatMap">Diagram</a>
+						</section>
+						<section>
+								<h3>SwitchMap</h3>
+								<pre><code class="hljs" data-trim data-noescape data-include="examples/combining-switchmap.kt"></code></pre>
+								<a target="blank" href="http://rxmarbles.com/#switchMap">Diagram</a>
+							</section>
+						<section>
+								<h3>Flowable backpressure</h3>
+								<pre><code class="hljs" data-trim data-noescape data-include="examples/combining-flowable.kt"></code></pre>
+						</section>
+				</section>
+
+				<section>
+						<section>
+						<h2>Summary</h2>
+						</section>
+						<section>
+							<h3>Reactive Extensions allows to:</h3>
+							<ul>
+								<li>treat different asynchronous sources same way</li>
+								<li>easily combine multiple asynchronous sources</li>
+								<li>write clean and testable concurrent code</li>
+								<li>model any behaviour in declarative way</li>
+							</ul>
+					</section>
+				</section>
+				<section>
+					<h2>Questions</h2>
+				</section>
+			</div>
+		</div>
+		<script src="js/jquery-3.3.1.min.js"></script>
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/data-include.js"></script>
+		<script src="js/reveal.js"></script>
+		<script src="js/reveal-code-maximize.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				],
+				history: true,
+			});
+		</script>
+
+<script>
+
+</script>
+
+
+	</body>
+</html>
